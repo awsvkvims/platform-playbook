@@ -1,0 +1,81 @@
+name: ci-starter-kit
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate-structure:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate repository structure
+        run: ./scripts/validate_structure.sh
+
+  validate-yaml:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Lint YAML files
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: .
+          config_data: |
+            extends: default
+            rules:
+              line-length:
+                max: 160
+                level: warning
+              document-start: disable
+
+  validate-terraform:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.5
+
+      - name: Terraform fmt check
+        run: |
+          terraform fmt -check -recursive starter-kit/terraform || true
+
+      - name: Find Terraform directories
+        id: tfdirs
+        run: |
+          mapfile -t dirs < <(find starter-kit/terraform -type f -name "*.tf" -exec dirname {} \; | sort -u)
+          if [ ${#dirs[@]} -eq 0 ]; then
+            echo "has_terraform=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_terraform=true" >> "$GITHUB_OUTPUT"
+            printf '%s\n' "${dirs[@]}" > tfdirs.txt
+          fi
+
+      - name: Terraform init and validate
+        if: steps.tfdirs.outputs.has_terraform == 'true'
+        run: |
+          while IFS= read -r dir; do
+            echo "Validating Terraform in ${dir}"
+            terraform -chdir="${dir}" init -backend=false
+            terraform -chdir="${dir}" validate
+          done < tfdirs.txt
+          

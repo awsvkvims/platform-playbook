@@ -1,0 +1,21 @@
+site_name: Platform Playbook
+site_description: Platform engineering playbook and enterprise DevOps starter kit
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Platform Vision: platform-vision.md
+  - Why Platforms Fail: why-platforms-fail.md
+  - Three Stage Platform Strategy: three-stage-platform-strategy.md
+  - Stage 1 Bootstrap Visibility: stage-1-bootstrap-visibility.md
+  - Stage 2 Pilot Co Creation: stage-2-pilot-co-creation.md
+  - Stage 3 Golden Path Self Service: stage-3-golden-path-self-service.md
+  - Team Design and Operating Model: team-design-and-operating-model.md
+  - Platform Toolchain Architecture: platform-toolchain-architecture.md
+  - Backstage IDP: backstage-idp.md
+  - Governance Security Compliance: governance-security-compliance.md
+  - Reliability SLI SLO: reliability-sli-slo.md
+  - Metrics and Adoption: metrics-and-adoption.md
+  - Launch Roadmap 30 60 90: launch-roadmap-30-60-90.md
+  - Enterprise Platform Starter: enterprise-platform-starter.md

@@ -3,7 +3,13 @@ site_description: Platform engineering playbook and enterprise DevOps starter ki
 
 theme:
   name: material
-
+  features:
+    - navigation.footer
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - search.highlight
+    
 nav:
   - Home: index.md
   - Platform Vision: platform-vision.md

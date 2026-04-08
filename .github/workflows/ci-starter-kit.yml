@@ -12,21 +12,15 @@ permissions:
 jobs:
   validate-structure:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Validate repository structure
         run: ./scripts/validate_structure.sh
 
   validate-yaml:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Lint YAML files
         uses: ibiqlik/action-yamllint@v3
         with:
@@ -39,25 +33,31 @@ jobs:
                 level: warning
               document-start: disable
 
+  validate-markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint Markdown files
+        uses: DavidAnson/markdownlint-cli2-action@v16
+        with:
+          globs: |
+            **/*.md
+            !.git/**
+
   validate-terraform:
     runs-on: ubuntu-latest
-
     defaults:
       run:
         shell: bash
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.8.5
 
       - name: Terraform fmt check
-        run: |
-          terraform fmt -check -recursive starter-kit/terraform || true
+        run: terraform fmt -check -recursive starter-kit/terraform
 
       - name: Find Terraform directories
         id: tfdirs
@@ -78,4 +78,3 @@ jobs:
             terraform -chdir="${dir}" init -backend=false
             terraform -chdir="${dir}" validate
           done < tfdirs.txt
-          

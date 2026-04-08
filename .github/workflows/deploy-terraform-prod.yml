@@ -1,35 +1,30 @@
-name: deploy-terraform-dev
+name: deploy-terraform-prod
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - "starter-kit/terraform/**/*.tf"
-      - "starter-kit/terraform/**/*.tfvars.example"
-      - ".github/workflows/deploy-terraform-dev.yml"
+    tags:
+      - "release/*"
 
 permissions:
   contents: read
   id-token: write
 
 concurrency:
-  group: terraform-dev
+  group: terraform-prod
   cancel-in-progress: false
 
 jobs:
-  apply-dev:
+  apply-prod:
     runs-on: ubuntu-latest
-    environment: dev
+    environment: prod
 
     defaults:
       run:
         shell: bash
-        working-directory: starter-kit/terraform/environments/dev
+        working-directory: starter-kit/terraform/environments/prod
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
@@ -39,7 +34,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ vars.AWS_ROLE_ARN_DEV }}
+          role-to-assume: ${{ vars.AWS_ROLE_ARN_PROD }}
           aws-region: ${{ vars.AWS_REGION }}
 
       - name: Verify AWS identity
@@ -56,7 +51,7 @@ jobs:
           cat > terraform.tfvars <<EOF
           aws_region    = "${{ vars.AWS_REGION }}"
           platform_name = "${{ vars.PLATFORM_NAME }}"
-          environment   = "dev"
+          environment   = "prod"
           account_id    = "${{ steps.aws_identity.outputs.account_id }}"
           owner         = "${{ vars.PLATFORM_OWNER }}"
           cost_center   = "${{ vars.COST_CENTER }}"

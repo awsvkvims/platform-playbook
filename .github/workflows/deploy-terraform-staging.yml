@@ -1,28 +1,31 @@
-name: validate-terraform-dev
+name: deploy-terraform-staging
 
 on:
-  workflow_dispatch:
-  pull_request:
+  push:
+    branches:
+      - main
     paths:
       - "starter-kit/terraform/**/*.tf"
       - "starter-kit/terraform/**/*.tfvars.example"
-      - ".github/workflows/validate-terraform-dev.yml"
-      - ".github/workflows/deploy-terraform-dev.yml"
+      - ".github/workflows/deploy-terraform-staging.yml"
 
 permissions:
   contents: read
   id-token: write
-  pull-requests: write
+
+concurrency:
+  group: terraform-staging
+  cancel-in-progress: false
 
 jobs:
-  plan-dev:
+  apply-staging:
     runs-on: ubuntu-latest
-    environment: dev
+    environment: staging
 
     defaults:
       run:
         shell: bash
-        working-directory: starter-kit/terraform/environments/dev
+        working-directory: starter-kit/terraform/environments/staging
 
     steps:
       - uses: actions/checkout@v4
@@ -35,7 +38,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ vars.AWS_ROLE_ARN_DEV }}
+          role-to-assume: ${{ vars.AWS_ROLE_ARN_STAGING }}
           aws-region: ${{ vars.AWS_REGION }}
 
       - name: Verify AWS identity
@@ -52,14 +55,14 @@ jobs:
           cat > terraform.tfvars <<EOF
           aws_region    = "${{ vars.AWS_REGION }}"
           platform_name = "${{ vars.PLATFORM_NAME }}"
-          environment   = "dev"
+          environment   = "staging"
           account_id    = "${{ steps.aws_identity.outputs.account_id }}"
           owner         = "${{ vars.PLATFORM_OWNER }}"
           cost_center   = "${{ vars.COST_CENTER }}"
           extra_tags = {
             repository = "${{ github.repository }}"
             managed_by = "github-actions"
-            purpose    = "starter-kit-validation"
+            purpose    = "starter-kit-deploy"
           }
           EOF
 
@@ -70,26 +73,10 @@ jobs:
         run: terraform validate
 
       - name: Terraform plan
-        id: plan
-        run: terraform plan -input=false -no-color 2>&1 | tee plan.txt
-        continue-on-error: true
+        run: terraform plan -input=false -out=tfplan
 
-      - name: Post plan to PR
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const plan = fs.readFileSync('starter-kit/terraform/environments/dev/plan.txt', 'utf8');
-            const truncated = plan.length > 60000 ? plan.substring(0, 60000) + '\n\n... output truncated' : plan;
-            const body = `### Terraform plan -- dev\n\`\`\`\n${truncated}\n\`\`\``;
-            await github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body
-            });
+      - name: Terraform apply
+        run: terraform apply -input=false -auto-approve tfplan
 
-      - name: Fail if plan failed
-        if: steps.plan.outcome == 'failure'
-        run: exit 1
+      - name: Show outputs
+        run: terraform output -json

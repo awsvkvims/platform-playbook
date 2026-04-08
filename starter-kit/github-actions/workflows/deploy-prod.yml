@@ -1,0 +1,46 @@
+name: deploy-prod
+
+on:
+  push:
+    tags:
+      - "release/*"
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: prod
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Log in to Amazon ECR
+        id: ecr-login
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Deploy to prod
+        env:
+          REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+          REPOSITORY: ${{ vars.ECR_REPOSITORY }}
+          IMAGE_TAG: ${{ github.ref_name }}
+        run: |
+          echo "Deploying $REGISTRY/$REPOSITORY:$IMAGE_TAG to prod"
+          # Replace with your deployment command.
+
+      - name: Verify deployment
+        run: |
+          echo "Add a health check or smoke test here"
+          

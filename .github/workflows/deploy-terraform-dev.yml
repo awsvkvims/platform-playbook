@@ -1,0 +1,82 @@
+name: deploy-terraform-dev
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "starter-kit/terraform/**"
+      - ".github/workflows/deploy-terraform-dev.yml"
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: terraform-dev
+  cancel-in-progress: false
+
+jobs:
+  apply-dev:
+    runs-on: ubuntu-latest
+    environment: dev
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: starter-kit/terraform/environments/dev
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.5
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN_DEV }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Verify AWS identity
+        run: aws sts get-caller-identity
+
+      - name: Resolve AWS account ID
+        id: aws_identity
+        run: |
+          ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+          echo "account_id=$ACCOUNT_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Create terraform.tfvars
+        run: |
+          cat > terraform.tfvars <<EOF
+          aws_region    = "${{ vars.AWS_REGION }}"
+          platform_name = "${{ vars.PLATFORM_NAME }}"
+          environment   = "dev"
+          account_id    = "${{ steps.aws_identity.outputs.account_id }}"
+          owner         = "${{ vars.PLATFORM_OWNER }}"
+          cost_center   = "${{ vars.COST_CENTER }}"
+          extra_tags = {
+            repository = "${{ github.repository }}"
+            managed_by = "github-actions"
+            purpose    = "starter-kit-deploy"
+          }
+          EOF
+
+      - name: Terraform init
+        run: terraform init -input=false
+
+      - name: Terraform validate
+        run: terraform validate
+
+      - name: Terraform plan
+        run: terraform plan -input=false -out=tfplan
+
+      - name: Terraform apply
+        run: terraform apply -input=false -auto-approve tfplan
+
+      - name: Show outputs
+        run: terraform output -json

@@ -2,7 +2,8 @@
 
 ## Purpose
 
-This directory is intended for reference examples showing how LaunchDarkly projects, environments, flags, or related resources can be managed as code.
+This directory is intended for reference examples showing how LaunchDarkly projects, environments, flags, or 
+related resources can be managed as code.
 
 ## Notes
 

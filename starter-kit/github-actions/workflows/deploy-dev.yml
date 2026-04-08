@@ -47,4 +47,3 @@ jobs:
         run: |
           echo "Add a health check or smoke test here"
           # Example: curl --fail https://my-service.dev.internal/healthz
-

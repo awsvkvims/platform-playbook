@@ -9,4 +9,5 @@ Spacelift Terraform provider.
 If you prefer to manage Spacelift stacks as code, the definitions below map directly
 to the `spacelift_stack` resource in the Spacelift Terraform provider.
 
-See https://registry.terraform.io/providers/spacelift-io/spacelift/latest/docs/resources/stack
+See the [spacelift_stack resource docs]
+(https://registry.terraform.io/providers/spacelift-io/spacelift/latest/docs/resources/stack)

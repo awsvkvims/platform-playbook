@@ -2,7 +2,8 @@
 
 ## Purpose
 
-This directory contains reference patterns for integrating feature management checks or progressive delivery logic into GitHub Actions workflows.
+This directory contains reference patterns for integrating feature management checks or progressive delivery logic 
+into GitHub Actions workflows.
 
 ## Example use cases
 

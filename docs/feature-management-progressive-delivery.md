@@ -53,4 +53,3 @@ The starter kit includes a LaunchDarkly reference structure for:
 - Three Stage Platform Strategy
 - Stage 3 Golden Path Self Service
 - Enterprise Platform Starter
-

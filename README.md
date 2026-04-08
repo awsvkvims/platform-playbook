@@ -4,22 +4,26 @@ A platform engineering playbook and enterprise DevOps starter kit for teams buil
 
 [![Docs](https://img.shields.io/badge/docs-platform--playbook-blue)](https://awsvkvims.github.io/platform-playbook)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![CI](https://github.com/awsvkvims/platform-playbook/actions/workflows/docs.yml/badge.svg)](https://github.com/awsvkvims/platform-playbook/actions)
+[![CI](https://github.com/awsvkvims/platform-playbook/actions/workflows/docs.yml/badge.svg)]
+(https://github.com/awsvkvims/platform-playbook/actions)
 
 ---
 
 ## Purpose
 
-This repository helps platform engineering leaders, DevOps managers, and enterprise architects build a high-performing DevOps capability and create an Internal Developer Platform (IDP) from the ground up.
+This repository helps platform engineering leaders, DevOps managers, and enterprise architects build a high-performing 
+DevOps capability and create an Internal Developer Platform (IDP) from the ground up.
 
 It ships two connected products:
 
 1. **A documentation site** -- published to GitHub Pages via MkDocs Material
-2. **An enterprise starter kit** -- Terraform, GitHub Actions, Spacelift, and Backstage scaffolding that teams can clone and extend
+2. **An enterprise starter kit** -- Terraform, GitHub Actions, Spacelift, and Backstage scaffolding that teams can 
+clone and extend
 
 ---
 
 ## Quick start
+
 ```bash
 # 1. Clone the repo
 git clone https://github.com/awsvkvims/platform-playbook.git
@@ -78,6 +82,7 @@ The guiding principle: treat the platform as an **internal product**, not a cent
 ---
 
 ## Repository structure
+
 ```
 platform-playbook/
   .github/
@@ -94,6 +99,7 @@ platform-playbook/
   mkdocs.yml           # Docs site configuration
   requirements.txt     # Python deps for MkDocs
 ```
+
 ---
 
 ## Prerequisites

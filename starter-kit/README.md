@@ -2,9 +2,11 @@
 
 ## Overview
 
-This starter kit provides a reference implementation structure for building an enterprise DevOps and platform engineering capability.
+This starter kit provides a reference implementation structure for building an enterprise DevOps and platform 
+engineering capability.
 
-It is designed to be cloned, configured, and extended by platform teams. It is not intended to be a one-click platform. It is an accelerator and reference architecture aligned to the platform playbook.
+It is designed to be cloned, configured, and extended by platform teams. It is not intended to be a one-click 
+platform. It is an accelerator and reference architecture aligned to the platform playbook.
 
 ## Goals
 

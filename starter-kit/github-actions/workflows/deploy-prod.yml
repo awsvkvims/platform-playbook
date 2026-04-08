@@ -43,4 +43,3 @@ jobs:
       - name: Verify deployment
         run: |
           echo "Add a health check or smoke test here"
-

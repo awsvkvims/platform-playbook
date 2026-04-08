@@ -13,6 +13,13 @@ MD013:
   tables: false
   headings: false
 
+# Per-file overrides
+overrides:
+  - paths:
+      - "README.md"
+    rules:
+      MD013: false
+      
 # MD033 -- allow inline HTML
 # Needed for some MkDocs Material admonitions and badges.
 MD033: false

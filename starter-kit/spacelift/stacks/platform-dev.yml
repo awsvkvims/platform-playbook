@@ -27,4 +27,3 @@ labels:
   - environment:dev
   - managed-by:platform-team
   - auto-apply:true
-

@@ -8,7 +8,8 @@ This playbook uses a 3-stage strategy for building and adopting a platform:
 2. Co-create with a pilot team
 3. Establish the golden path and self-service
 
-The purpose of this strategy is to avoid the most common platform failure mode: building a platform in isolation and expecting teams to adopt it because it exists.
+The purpose of this strategy is to avoid the most common platform failure mode: building a platform in isolation 
+and expecting teams to adopt it because it exists.
 
 Instead, the platform is treated as an internal product.
 
@@ -24,7 +25,8 @@ The strategy is based on the following principles:
 
 ## Stage 1 - Bootstrap through visibility
 
-The first stage creates enough visibility into the current delivery system so teams can understand what they own, how they deploy, what infrastructure they depend on, and where technical or compliance debt exists.
+The first stage creates enough visibility into the current delivery system so teams can understand what they own, how 
+they deploy, what infrastructure they depend on, and where technical or compliance debt exists.
 
 Typical outcomes include:
 
@@ -38,7 +40,8 @@ The goal is not to replace current workflows. The goal is to create shared under
 
 ## Stage 2 - Co-create with a pilot team
 
-The second stage works with a volunteer or pilot team, ideally one that is already experiencing delivery friction or compliance debt.
+The second stage works with a volunteer or pilot team, ideally one that is already experiencing delivery friction or 
+compliance debt.
 
 Platform engineers and the pilot team collaborate to build:
 
@@ -62,7 +65,8 @@ Typical outputs include:
 - Policy-based guardrails
 - Self-service team onboarding
 
-The goal is to reduce the time required to onboard a new service or team while maintaining governance, reliability, and developer experience.
+The goal is to reduce the time required to onboard a new service or team while maintaining governance, reliability, and 
+developer experience.
 
 ## Why this model works
 

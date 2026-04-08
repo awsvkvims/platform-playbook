@@ -1,0 +1,27 @@
+# Spacelift stack definition -- platform-prod
+
+name: platform-prod
+description: Platform baseline infrastructure -- prod environment
+
+repository: platform-playbook
+# Prod only triggers from release tags, not from main branch pushes.
+# Configure a push policy to enforce this -- see policies/push-prod.rego
+branch: main
+project_root: starter-kit/terraform/environments/prod
+
+terraform_version: "1.8.5"
+terraform_workspace: platform-prod
+
+# Prod never auto-deploys -- always requires approval
+autodeploy: false
+autoretry: false
+protect_from_deletion: true
+
+runner_image: public.ecr.aws/spacelift/runner-terraform:latest
+
+labels:
+  - environment:prod
+  - managed-by:platform-team
+  - auto-apply:false
+  - requires-approval:true
+  

@@ -1,0 +1,30 @@
+# Spacelift stack definition -- platform-dev
+# Use this as a reference when creating the stack in the Spacelift UI
+# or as input to the spacelift_stack Terraform resource.
+
+name: platform-dev
+description: Platform baseline infrastructure -- dev environment
+
+# Source
+repository: platform-playbook
+branch: main
+project_root: starter-kit/terraform/environments/dev
+
+# Runtime
+terraform_version: "1.8.5"
+terraform_workspace: platform-dev
+
+# Behaviour
+autodeploy: true
+autoretry: false
+protect_from_deletion: false
+
+# Runner
+runner_image: public.ecr.aws/spacelift/runner-terraform:latest
+
+# Labels used for policy attachment
+labels:
+  - environment:dev
+  - managed-by:platform-team
+  - auto-apply:true
+  

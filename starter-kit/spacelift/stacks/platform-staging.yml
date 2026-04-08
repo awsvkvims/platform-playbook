@@ -1,0 +1,25 @@
+# Spacelift stack definition -- platform-staging
+
+name: platform-staging
+description: Platform baseline infrastructure -- staging environment
+
+repository: platform-playbook
+branch: main
+project_root: starter-kit/terraform/environments/staging
+
+terraform_version: "1.8.5"
+terraform_workspace: platform-staging
+
+# Staging requires a human approval before apply
+autodeploy: false
+autoretry: false
+protect_from_deletion: true
+
+runner_image: public.ecr.aws/spacelift/runner-terraform:latest
+
+labels:
+  - environment:staging
+  - managed-by:platform-team
+  - auto-apply:false
+  - requires-approval:true
+  

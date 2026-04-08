@@ -1,0 +1,2 @@
+# outputs.tf -- staging environment
+# Add environment-specific outputs here as resources are defined.

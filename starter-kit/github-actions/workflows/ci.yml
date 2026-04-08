@@ -1,6 +1,6 @@
 name: ci
 
-on:
+"on":
   pull_request:
   push:
     branches:
@@ -66,4 +66,4 @@ jobs:
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
           docker tag $REGISTRY/$REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:latest
           docker push $REGISTRY/$REPOSITORY:latest
-          
+

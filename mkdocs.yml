@@ -46,26 +46,27 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Strategy:
-    - Platform Vision: platform-vision.md
-    - Why Platforms Fail: why-platforms-fail.md
-    - Three Stage Strategy: three-stage-platform-strategy.md
+      - Platform Vision: platform-vision.md
+      - Why Platforms Fail: why-platforms-fail.md
+      - Three Stage Strategy: three-stage-platform-strategy.md
   - Stage 1 -- Bootstrap:
-    - Bootstrap and Visibility: stage-1-bootstrap-visibility.md
+      - Bootstrap and Visibility: stage-1-bootstrap-visibility.md
   - Stage 2 -- Co-create:
-    - Pilot Co-creation: stage-2-pilot-co-creation.md
+      - Pilot Co-creation: stage-2-pilot-co-creation.md
   - Stage 3 -- Golden Path:
-    - Golden Path and Self-service: stage-3-golden-path-self-service.md
+      - Golden Path and Self-service: stage-3-golden-path-self-service.md
   - Team and Operating Model:
-    - Team Design: team-design-and-operating-model.md
+      - Team Design: team-design-and-operating-model.md
   - Technical Platform:
-    - Toolchain Architecture: platform-toolchain-architecture.md
-    - Backstage IDP: backstage-idp.md
-    - Feature Management: feature-management-progressive-delivery.md
+      - Toolchain Architecture: platform-toolchain-architecture.md
+      - Backstage IDP: backstage-idp.md
+      - Feature Management: feature-management-progressive-delivery.md
   - Governance and Reliability:
-    - Governance, Security, Compliance: governance-security-compliance.md
-    - Reliability, SLI and SLO: reliability-sli-slo.md
+      - Governance, Security, Compliance: governance-security-compliance.md
+      - Reliability, SLI and SLO: reliability-sli-slo.md
   - Outcomes:
-    - Metrics and Adoption: metrics-and-adoption.md
-    - Launch Roadmap 30-60-90: launch-roadmap-30-60-90.md
+      - Metrics and Adoption: metrics-and-adoption.md
+      - Launch Roadmap 30-60-90: launch-roadmap-30-60-90.md
   - Starter Kit:
-    - Overview: enterprise-platform-starter.md
+      - Overview: enterprise-platform-starter.md
+

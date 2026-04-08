@@ -1,6 +1,6 @@
 name: deploy-terraform-prod
 
-on:
+"on":
   push:
     tags:
       - "release/*"

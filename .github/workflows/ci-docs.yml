@@ -1,6 +1,6 @@
 name: ci-docs
 
-on:
+"on":
   pull_request:
   push:
     branches:
@@ -29,4 +29,4 @@ jobs:
 
       - name: Build documentation site
         run: mkdocs build --strict
-        
+

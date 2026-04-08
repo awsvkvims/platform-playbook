@@ -1,6 +1,6 @@
 name: deploy-staging
 
-on:
+"on":
   push:
     branches:
       - main

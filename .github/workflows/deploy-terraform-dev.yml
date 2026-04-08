@@ -1,6 +1,6 @@
 name: deploy-terraform-dev
 
-on:
+"on":
   push:
     branches:
       - main

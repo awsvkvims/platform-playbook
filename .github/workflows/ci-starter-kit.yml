@@ -1,6 +1,6 @@
 name: ci-starter-kit
 
-on:
+"on":
   pull_request:
   push:
     branches:

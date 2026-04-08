@@ -1,6 +1,6 @@
 name: security-scan
 
-on:
+"on":
   pull_request:
   push:
     branches:

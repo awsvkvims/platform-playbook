@@ -1,6 +1,6 @@
 name: deploy-terraform-staging
 
-on:
+"on":
   push:
     branches:
       - main

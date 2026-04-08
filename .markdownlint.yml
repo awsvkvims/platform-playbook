@@ -1,0 +1,22 @@
+# .markdownlint.yml
+# Markdownlint configuration for platform-playbook.
+# See https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+
+default: true
+
+# MD013 -- line length
+# 120 chars is a reasonable limit for a technical playbook.
+# Code blocks and tables are excluded as they cannot always be wrapped.
+MD013:
+  line_length: 120
+  code_blocks: false
+  tables: false
+  headings: false
+
+# MD033 -- allow inline HTML
+# Needed for some MkDocs Material admonitions and badges.
+MD033: false
+
+# MD041 -- first line should be a top-level heading
+# Disabled because MkDocs uses the nav title, not the first heading.
+MD041: false

@@ -1,66 +1,128 @@
 # Platform Playbook
 
-A platform engineering playbook and enterprise DevOps platform starter kit.
+A platform engineering playbook and enterprise DevOps starter kit for teams building Internal Developer Platforms on AWS.
+
+[![Docs](https://img.shields.io/badge/docs-platform--playbook-blue)](https://awsvkvims.github.io/platform-playbook)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![CI](https://github.com/awsvkvims/platform-playbook/actions/workflows/docs.yml/badge.svg)](https://github.com/awsvkvims/platform-playbook/actions)
+
+---
 
 ## Purpose
 
-This repository is designed to help platform engineering leaders, DevOps managers, and enterprise architects build a high-performing DevOps capability and create an Internal Developer Platform from the ground up.
+This repository helps platform engineering leaders, DevOps managers, and enterprise architects build a high-performing DevOps capability and create an Internal Developer Platform (IDP) from the ground up.
 
-It contains two connected products:
+It ships two connected products:
 
-1. A documentation site published with GitHub Pages
-2. A starter kit that platform teams can clone, configure, and extend for enterprise use
+1. **A documentation site** -- published to GitHub Pages via MkDocs Material
+2. **An enterprise starter kit** -- Terraform, GitHub Actions, Spacelift, and Backstage scaffolding that teams can clone and extend
 
-## What is included
+---
 
-### Platform Playbook
+## Quick start
+```bash
+# 1. Clone the repo
+git clone https://github.com/awsvkvims/platform-playbook.git
+cd platform-playbook
 
-The playbook explains how to:
+# 2. Browse the docs locally
+pip install -r requirements.txt
+mkdocs serve
 
-- Build a high-performing DevOps and platform engineering team
-- Use a 3-stage rollout strategy
-- Create an Internal Developer Platform with Backstage
-- Establish CI/CD, Infrastructure as Code, observability, reliability, and governance practices
-- Create a golden path for product teams
+# 3. Explore the starter kit
+ls starter-kit/
+```
 
-### Enterprise Platform Starter Kit
+Then read the [Platform Playbook docs](https://awsvkvims.github.io/platform-playbook) for the full rollout guide.
 
-The starter kit provides a reference structure for:
+---
 
-- AWS platform foundations
-- Terraform modules and environment layout
-- Spacelift stacks and policies
-- GitHub Actions workflow templates
-- Backstage catalog and templates
-- Security, compliance, and observability patterns
+## What's included
 
-## Core Approach
+### Platform Playbook (docs/)
+
+Strategic and operational guidance for platform teams:
+
+- 3-stage platform rollout strategy (bootstrap -> co-create -> golden path)
+- How to build and organise a platform engineering team
+- Internal Developer Platform design with Backstage
+- CI/CD, Infrastructure as Code, observability, reliability, and governance practices
+- Golden path templates for product teams
+
+### Enterprise Platform Starter Kit (starter-kit/)
+
+Reference implementation for AWS-based platforms:
+
+| Area | Contents |
+|------|----------|
+| AWS foundations | VPC, IAM, S3 remote state, account structure |
+| Terraform modules | Reusable modules and environment layout (dev/staging/prod) |
+| Spacelift | Stack configs and drift-detection policies |
+| GitHub Actions | Reusable CI/CD workflow templates |
+| Backstage | Catalog scaffolding and service templates |
+| Security | IAM guardrails, scanning pipeline steps (in progress) |
+| Observability | Prometheus/Grafana configs (in progress) |
+
+---
+
+## Core approach
 
 This playbook uses a 3-stage platform strategy:
 
-1. Bootstrap through visibility
-2. Co-create with a pilot team
-3. Establish the golden path and self-service platform
+1. **Bootstrap** -- establish visibility, remote state, and a thin golden path
+2. **Co-create** -- work alongside a pilot product team to prove value
+3. **Scale** -- establish the self-service platform and golden path for all teams
 
-The guiding principle is to treat the platform as an internal product, not a central control function.
+The guiding principle: treat the platform as an **internal product**, not a central control function.
 
-## Repository Structure
+---
 
-- `docs/` - GitHub Pages content
-- `starter-kit/` - reference platform implementation
-- `templates/` - reusable templates
-- `diagrams/` - architecture diagrams
+## Repository structure
+```
+platform-playbook/
+  .github/
+    workflows/         # CI -- docs publishing, Terraform validate and deploy
+  diagrams/            # Architecture diagrams (draw.io / Mermaid)
+  docs/                # MkDocs source -- the playbook content
+  scripts/             # Utility scripts (bootstrap, lint, etc.)
+  starter-kit/         # Reference platform implementation
+    backstage/         # Backstage catalog and templates
+    github-actions/    # Reusable workflow templates
+    spacelift/         # Spacelift stacks and policies
+    terraform/         # Terraform modules and environments
+  templates/           # Reusable doc and config templates
+  mkdocs.yml           # Docs site configuration
+  requirements.txt     # Python deps for MkDocs
+```
+---
+
+## Prerequisites
+
+| Tool | Version | Purpose |
+|------|---------|---------|
+| Terraform | >= 1.6 | Infrastructure as Code |
+| AWS CLI | >= 2.x | AWS authentication |
+| Node.js | >= 18 | Backstage |
+| Python | >= 3.10 | MkDocs docs site |
+| Docker | any | Local Backstage dev |
+
+---
 
 ## Who this is for
 
-This repository is intended for:
+- Platform engineering leads and DevOps managers
+- Enterprise architects designing IDPs
+- Engineering enablement teams
+- Developers building on top of an internal platform
 
-- DevOps managers
-- Platform engineering leaders
-- Enterprise architects
-- Engineering enablement leaders
-- Teams building Internal Developer Platforms
+---
 
-## Next Steps
+## Contributing
 
-Start with the documentation in `docs/` and use the starter kit in `starter-kit/` as a reference implementation for enterprise adoption.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Contributions, issues, and PRs are welcome.
+
+---
+
+## License
+
+MIT -- see [LICENSE](LICENSE).
